@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Librarian Login{% endblock %}
+{% block content %}
+    <div class="myform">
+        <form class="form-horizontal" method="post">
+            <div class="form-group">
+                <label class="control-label col-xs-2" for="username">Username:</label>
+                <div class="col-xs-10">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-2" for="password">Password:</label>
+                <div class="col-xs-10">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-offset-2 col-xs-10">
+                    <div class="checkbox">
+                        <label><input type="checkbox"> Remember me</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-offset-2 col-xs-10">
+                <button type="submit" class="btn btn-default">Login</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-offset-2 col-xs-10">
+                <a href="{{ url_for('auth.login', _user_ = 'user') }}">Normal User?</a>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

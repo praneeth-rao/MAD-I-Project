@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}overview{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-offset-2 col-lg-10">
+                <span>User Count: {{ details['user_count'][0] }}</span><br>
+                <span>Section Count: {{ details['section_count'][0] }}</span><br>
+                <span>Book Count: {{ details['book_count'][0] }}</span><br>
+                <span>Request Count: {{ details['request_count'][0] }}</span><br>
+                <span>Assignment Count: {{ details['assignment_count'][0] }}</span>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}Sections{% endblock %}
+
+{% block content %}
+    <div class="search">
+        {% if results %}
+            <span>{{ count }} results found.</span><hr>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Seciton ID</th>
+                        <th scope="col">Book ID</th>
+                        <th scope="col">Book Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for (s_id, b_id, b_name) in results %}
+                        <tr>
+                            <td>{{ s_id }}</td>
+                            <td>{{ b_id }}</td>
+                            <td>{{ b_name }}</td>
+                            <td><a href="{{ url_for('library.books_view', section_id = s_id ) }}">details</a></td>
+                        <tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% elif results == [] %}
+            <span>No results found!</span>
+        {% endif %}
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 sidebar">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a href="{{ url_for('library.overview') }}">Overview</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('library.book_requests') }}">Book Requests</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('library.book_assignments') }}">Book Assignments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('library.profile_update', id=g.user['id']) }}">Profile</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-9 main-content">
+                {% if g.user %}
+                    <span>Want to add new Section? >> </span>
+                    <a href="{{ url_for('library.create') }}">New</a>
+                {% endif %}
+                <hr>
+                {% for section in sections %}
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <span>Section id: {{ section['id'] }}</span><br>
+                                <span>Section Name: {{ section['name'] }}</span><br>
+                                <span>Date Created: {{ section['date_created'] }}</span><br>
+                                <a href="{{ url_for('library.section_update', id=section['id']) }}">UPDATE</a><br>
+                                <a href="{{ url_for('library.section_delete', id=section['id']) }}">DELETE</a>
+                            </div>
+                            <div class="col-lg-8"><p>{{ section['description'] }}</p></div>
+                        </div>
+                    </div>
+                    <a href="{{ url_for('library.books', section_id = section['id']) }}">ADD BOOKS</a><br>
+                    <a href="{{ url_for('library.books_view', section_id = section['id']) }}">View Books</a>
+                    {% if not loop.last %}
+                        <hr>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

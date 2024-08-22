@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Book Requests{% endblock %}
+
+{% block content %}
+    {% if all_reqs %}
+        <h3>Book Requests</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">User ID</th>
+                    <th scope="col">Request ID</th>
+                    <th scope="col">Book ID</th>
+                    <th scope="col">Request Date</th>
+                    <th scope="col">Accept/Reject</th>
+                </tr>
+            </thead>
+            {% for all_req in all_reqs %}
+            <tbody>
+                <tr>
+                    <td>{{ all_req['user_id'] }}</td>
+                    <td>{{ all_req['id'] }}</td>
+                    <td>{{ all_req['book_id'] }}</td>
+                    <td>{{ all_req['request_date'] }}</td>
+                    <td><a href="{{ url_for('library.assignment', user_id = all_req['user_id'], book_id = all_req['book_id'], request_id = all_req['id']) }}">Accept</a> <a href="{{ url_for('library.decline', request_id = all_req['id']) }}">Reject</a></p></td>
+                <tr>
+            </tbody>
+        {% endfor %}
+    </table>
+    {% else %}
+        <div style="color: brown; text-align: center;">No Book Requests Found.</div>
+    {% endif %}
+{% endblock %}

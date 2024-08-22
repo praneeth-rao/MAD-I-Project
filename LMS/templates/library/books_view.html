@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}All Books{% endblock %}
+
+{% block content %}
+    {% for book in all_books %}
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <span>Book id: {{ book['id'] }}</span><br>
+                    <span>Book Name: {{ book['name'] }}</span><br>
+                    <span>Author: {{ book['author'] }}</span><br>
+                    {% if g.user['role'] == 'librarian' %}
+                        <a href="{{ url_for('library.book_update', id=book['id']) }}">UPDATE</a><br>
+                        <a href="{{ url_for('library.book_delete', id=book['id']) }}">DELETE</a>
+                    {% endif %}
+                    {% if g.user == None %}
+                        <a href="{{ url_for('auth.login', _user_ = 'user') }}">Request</a>
+                    {% endif %}
+                    {% if g.user['role'] == 'user' and ((g.user['id'], book['id']) in in_assign) %}
+                        <a href="{{ url_for('library.book_return', user_id = g.user['id'], book_id = book['id']) }}">Return</a>
+                    {% elif g.user['role'] == 'user' and ((g.user['id'], book['id']) in in_req) %}
+                        <span>*Book request Sent</span>
+                    {% elif userids.count(g.user['id']) == 5 %}
+                        <span>*Book request limit exceeded(Maximum of only 5 books are allowed)</span>
+                    {% elif g.user['role'] == 'user' and ((g.user['id'], book['id']) not in in_req) and ((g.user['id'], book['id']) not in in_assign) %}
+                        <a href="{{ url_for('library.add_requests', book_id = book['id']) }}">Request</a>
+                    {% endif %}
+                </div>
+                <div class="col-lg-8"><p>{{ book['description'] }}</p></div>
+            </div>
+        </div>
+        {% if not loop.last %}
+            <hr>
+        {% endif %}
+    {% endfor %}
+    <div><a href="{{ url_for('library.dashboard') }}">Go Back</a></div>
+{% endblock %}

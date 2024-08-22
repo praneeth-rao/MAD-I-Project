@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+    <form class="form-horizontal" method="post">
+        <div class="form-group">
+            <label class="control-label col-xs-offset-2 col-xs-2" for="id">User ID:</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" id="id" name="id" value="{{ details['id'] }}" readonly>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-offset-2 col-xs-2" for="username">Username:</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" id="username" name="username" value="{{ details['username'] }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-offset-2 col-xs-2" for="first_name">First Name:</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" id="first_name" name="first_name" value="{{ details['first_name'] }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-offset-2 col-xs-2" for="last_name">Last Name:</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" id="last_name" name="last_name" value="{{ details['last_name'] }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-offset-2 col-xs-2" for="email">Email:</label>
+            <div class="col-xs-4">
+                <input type="email" class="form-control" id="email" name="email" value="{{ details['email'] }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-offset-2 col-xs-2" for="phone">Phone:</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" id="phone" name="phone" value="{{ details['phone'] }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-offset-2 col-xs-2" for="address">Address:</label>
+            <div class="col-xs-4">
+                <textarea class="form-control" id="address" rows="5" name="address">{{ details['address'] }}</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-offset-7 col-xs-5">
+            <button type="submit" class="btn btn-default">Save</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

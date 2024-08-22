@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Book Edit{% endblock %}
+
+{% block content %}
+    <form method="post">
+        <div class="form-group">
+            <label for="name">Book Name:</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ details['name'] }}">
+        </div>
+        <div class="form-group">
+            <label for="author">Author Name:</label>
+            <input type="text" class="form-control" id="author" name="author" value="{{ details['author'] }}">
+        </div>
+        <div class="form-group">
+            <label for="content">Content:</label>
+            <textarea class="form-control" id="content" rows="5" name="content">{{ details['content'] }}</textarea>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-default">SAVE</button>
+        </div>
+    </form>
+{% endblock %}

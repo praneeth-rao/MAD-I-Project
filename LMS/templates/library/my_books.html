@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}My Books{% endblock %}
+
+{% block content %}
+    {% if my_assign %}
+        <h3>My Books</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Assignment ID</th>
+                    <th scope="col">Book ID</th>
+                    <th scope="col">Date Issued</th>
+                    <th scope="col">Return Date</th>
+                    <th scope="col">Book Link</th>
+                </tr>
+            </thead>
+            {% for my in my_assign %}
+            <tbody>
+                <tr>
+                    <td>{{ my['id'] }}</td>
+                    <td>{{ my['book_id'] }}</td>
+                    <td>{{ my['date_issued'] }}</td>
+                    <td>{{ my['return_date'] }}</td>
+                    <td><a href="{{ my['path'] }}">Click Here</a></td>
+                <tr>
+            </tbody>
+        {% endfor %}
+    </table>
+    {% else %}
+        <div style="color: brown; text-align: center;">No Books Found. Please request for new books.</div>
+    {% endif %}
+{% endblock %}

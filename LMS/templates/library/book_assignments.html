@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Assignments{% endblock %}
+
+{% block content %}
+    {% if assigns %}
+        <h3>Book Assignmets</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">User ID</th>
+                    <th scope="col">Assignment ID</th>
+                    <th scope="col">Book ID</th>
+                    <th scope="col">Date Issued</th>
+                    <th scope="col">Return Date</th>
+                    <th scope="col">Revoke Access</th>
+                </tr>
+            </thead>
+            {% for assign in assigns %}
+            <tbody>
+                <tr>
+                    <td>{{ assign['user_id'] }}</td>
+                    <td>{{ assign['id'] }}</td>
+                    <td>{{ assign['book_id'] }}</td>
+                    <td>{{ assign['date_issued'] }}</td>
+                    <td>{{ assign['return_date'] }}</td>
+                    <td><a href="{{ url_for('library.cancel_assignment', assign_id = assign['id']) }}">Decline</a></td>
+                <tr>
+            </tbody>
+        {% endfor %}
+    </table>
+    {% else %}
+        <div style="color: brown; text-align: center;">No Assigments Found.</div>
+    {% endif %}
+{% endblock %}

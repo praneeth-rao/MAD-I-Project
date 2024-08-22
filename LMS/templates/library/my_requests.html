@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Sections{% endblock %}
+
+{% block content %}
+    {% if my_reqs %}
+        <h3>My Requests</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Request ID</th>
+                    <th scope="col">Book ID</th>
+                    <th scope="col">Request Date</th>
+                </tr>
+            </thead>
+        {% for my_req in my_reqs %}
+            <tbody>
+                <tr>
+                    <td>{{ my_req['id'] }}</td>
+                    <td>{{ my_req['book_id'] }}</td>
+                    <td>{{ my_req['request_date'] }}</td>
+                <tr>
+            </tbody>
+        {% endfor %}
+    </table>
+    {% else %}
+        <div style="color: brown; text-align: center;">No Books Found. Please request for new books.</div>
+    {% endif %}
+{% endblock %}
